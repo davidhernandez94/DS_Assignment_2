@@ -18,7 +18,7 @@ public abstract class Employee {
         this("vav", 17);
     }
 
-    public abstract double calculateSalary(int performanceRating);
+    public abstract double calculateSalary();
 
     public void displayDetails() {
         System.out.printf(this.toString());

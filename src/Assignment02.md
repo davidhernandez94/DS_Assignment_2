@@ -8,10 +8,9 @@
 
 **Please submit four .java files in total. Do not zip your files**.
 
-* one .java files for task 1, 2 and 3 (Main.java)
-* one .java files for task 4.1 (Author.java)
-* one .java files for task 4.2 (Book.java)
-* one .java files for task 4.3 (MyLibrary.java)
+* for each task, you will have to create three packages (i.e.: `employeemanagementsystem`, `librarycatalogsystem`, and `flexiblestudentcomparator`) and put all files related to each task inside.
+* `Main.java` does not belong to any package above.
+* one zip file that contains the entire project
 
 **Full Score**: 100
 
@@ -32,17 +31,37 @@ Design an Employee Management System that has different types of employees. The 
 
 ### Requirements:
 
-1. Create an abstract class Employee with the following fields:
+1. Create an abstract class `Employee` with the following fields:
   - `String name`
   - `int id`
   - `double baseSalary`
+  - Default constructor
+  - All arguments constructor
   - Abstract method `double calculateSalary()`
-  - Concrete method `void displayDetails()` to print employee information.
+  - Concrete method `void displayDetails()` to print employee information (use `toString()` method).
+  - `toString()`
+  - `equals()`
+  - Getters and setters
 2. Create two subclasses:
-  - `FullTimeEmployee`: The salary is calculated as `baseSalary + performanceBonus`.
-  - `PartTimeEmployee`: The salary is calculated as `hourlyRate * hoursWorked`.
-3. Create an interface BonusEligible with a method:
-  - `double calculateBonus(int performanceRating)`;
+  - `FullTimeEmployee`: 
+    - `int performanceRating`
+    - Default constructor
+    - All arguments constructor
+    - The salary is calculated as `baseSalary + performanceBonus`.
+    - `toString()`
+    - `equals()`
+    - Getters and setters
+  - `PartTimeEmployee`: 
+    - `int hoursWorked`
+    - `double hourlyRate`
+    - Default constructor
+    - All arguments constructor
+    - The salary is calculated as `hourlyRate * hoursWorked`.
+    - `toString()`
+    - `equals()`
+    - Getters and setters
+3. Create an interface `BonusEligible` with a method:
+  - `double calcBonus()`;
   - Only `FullTimeEmployee` should implement this interface. If the rating is `>= 8`, give a `10%` bonus, otherwise, `5%`.
 4. Test the system by creating an array of Employee objects (both full-time and part-time), displaying their details, and calculating their salaries.
 
@@ -53,18 +72,36 @@ Design an Employee Management System that has different types of employees. The 
 You need to design a Library Catalog System that keeps track of books and their details.
 
 ### Requirements:
-1. Create an abstract class Book with:
+1. Create an abstract class `Book` with:
   - `String title`
   - `String author`
   - `int publicationYear`
-  - `Abstract method void displayInfo()`
+  - Default constructor (`publicationYear = 2000`)
+  - All arguments constructor
+  - `toString()`
+  - `equals()`
+  - Getters and setters
 2. Create two subclasses:
-  - Ebook: Additional field double fileSizeMB
-  - PrintedBook: Additional field int numOfPages
-3. Implement Comparable<Book>:
-  - Compare books by publicationYear (older books first).
-4. Sort and display books:
-  - Store books in an ArrayList<Book> and sort them using Collections.sort().
+  - `Ebook`:
+    - `double fileSizeMB`
+    - Default constructor
+    - All arguments constructor 
+  - `PrintedBook`: 
+    - `int numOfPages`
+    - Default constructor
+    - All arguments constructor 
+3. `Book` class Implement `Comparable<Book>`:
+  - Compare books by `publicationYear` (older books first).
+4. `Ebook` override the `compareTo()`
+  - If the other book is also an ebook, compare books by `fileSizeMB` assendingly.
+  - Else compare by using the `compareTo()` defined in the super class.
+5. `PrintedBook` override the `compareTo()`
+  - If the other book is also a printedBook, compare books by `numOfPages` desendingly.
+  - Else compare by using the `compareTo()` defined in the super class.
+5. Sort and display books:
+  - Store books in an `ArrayList<Book>` and sort them using `Collections.sort()` and print the result.
+  - Store books in an `ArrayList<Ebook>` and sort them using `Collections.sort()` and print the result.
+  - Store books in an `ArrayList<PrintedBook>` and sort them using `Collections.sort()` and print the result.
 
 ## Task 3: Flexible Student Comparator
 
@@ -74,12 +111,17 @@ You need to compare students dynamically using a single comparator that supports
 
 ### Requirements:
 	
-1. Create a class Student with:
+1. Create a class `Student` with:
   - `int id`
   - `String name`
   - `double score`
   - `int age`
-2. Create a `StudentComparator` class that implements `Comparator<Student>` with a private field:
+  - Default constructor
+  - All arguments constructor 
+  - `toString()`
+  - `equals()`
+  - Getters and setters
+2. Create a `StudentComparator` class as an inner class in `Student` class that implements `Comparator<Student>` with a private field:
   - `String sortType` (values: `"score"`, `"name"`, `"id"`)
   - Constructor: `public StudentComparator(String sortType)`
   - In `compare()`, apply the following logic:
