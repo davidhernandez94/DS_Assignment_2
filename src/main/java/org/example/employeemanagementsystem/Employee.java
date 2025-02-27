@@ -1,4 +1,4 @@
-package org.example;
+package org.example.employeemanagementsystem;
 
 import java.util.Objects;
 
@@ -26,7 +26,7 @@ public abstract class Employee {
 
     @Override
     public String toString() {
-        return String.format("%-12s: %s \n%-12s: %06d \n%-12s: $%.2f/hour",
+        return String.format("%-20s: %s \n%-20s: %06d \n%-20s: $%.2f/hour",
                 "Name", name, "ID", id, "Base Salary", baseSalary);
     }
 
