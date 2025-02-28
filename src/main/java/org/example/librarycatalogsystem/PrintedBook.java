@@ -13,11 +13,16 @@ public class PrintedBook extends Book {
     }
 
     public int compareTo(Book book) {
-        if (book.getClass() == PrintedBook.class &&
-                ((PrintedBook) book).getNumOfPages() == numOfPages) {
-            return (int) (((PrintedBook) book).getNumOfPages() - numOfPages);
+        if (book instanceof PrintedBook &&
+                ((PrintedBook) book).getNumOfPages() != numOfPages) {
+            return ((PrintedBook) book).getNumOfPages() - numOfPages;
         }
         return super.compareTo(book);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + String.format("\n%-20s: %d", "Number of Pages", numOfPages);
     }
 
     public int getNumOfPages() {

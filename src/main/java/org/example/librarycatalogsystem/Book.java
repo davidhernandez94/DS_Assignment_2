@@ -24,7 +24,7 @@ public abstract class Book implements Comparable<Book> {
 
     @Override
     public String toString() {
-        return String.format("%-20s:%s\n%-20s:%s\n%-20s:%d",
+        return String.format("\n%-20s: %s\n%-20s: %s\n%-20s: %d",
                 "Title", title, "Author", author, "Publication Year", publicationYear);
     }
 
