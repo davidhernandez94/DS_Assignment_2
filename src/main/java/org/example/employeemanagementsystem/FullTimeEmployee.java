@@ -9,17 +9,26 @@ public class FullTimeEmployee extends Employee implements BonusEligible {
         super(name, baseSalary);
     }
 
-    @Override
-    public double calculateBonus(int performanceRating) {
-        return performanceRating >= 8 ? 1.1 : 1.05;
-    }
-
     public FullTimeEmployee() {
         this("jaj", 17);
     }
 
+    /**
+     * calculates salary based on base salary and bonus multiplier
+     * @return double
+     */
     public double calculateSalary() {
         return this.getBaseSalary() * this.calculateBonus(performanceRating);
+    }
+
+    /**
+     * calculates bonus of employee based on performance
+     * @param performanceRating int performance (1-10)
+     * @return double bonus multiplier (+5% or +10%)
+     */
+    @Override
+    public double calculateBonus(int performanceRating) {
+        return performanceRating >= 8 ? 1.1 : 1.05;
     }
 
     @Override

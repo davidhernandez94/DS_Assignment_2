@@ -3,7 +3,7 @@ package org.example.flexiblestudentcomparator;
 import java.util.Comparator;
 import java.util.Objects;
 
-public class Student {
+public class Student{
     private int id;
     private String name;
     private double score;
@@ -21,9 +21,16 @@ public class Student {
         this("lql", 0, 0);
     }
 
-    public class StudentComparator implements Comparator<Student> {
-        private String sortType;
+    public static class StudentComparator implements Comparator<Student> {
+        private static String sortType;
 
+        /**
+         * compares Students
+         * if sortType is "scores", sort by scores descending, if scores are equal, age ascending
+         * if sortType is "name", sort by name ascending, if names are equal, id ascending
+         * default sortType, sort by id ascending, if id are equal, age descending
+         * @param sortType type of sorting
+         */
         public StudentComparator(String sortType) {
             this.sortType = sortType;
         }
@@ -31,15 +38,14 @@ public class Student {
         public int compare(Student student1, Student student2) {
             return switch(sortType) {
                 case "score" -> student1.score == student2.score
-                        ? student2.age - student1.age
-                        : (int) (student1.score - student2.score);
+                        ? student1.age - student2.age
+                        : (int) (student2.score - student1.score);
                 case "name" -> student2.name.equals(student1.name)
                         ? student1.id - student2.id
-                        : student2.name.compareTo(student1.name);
-                default -> student2.id == student1.id
-                        ? student1.age - student2.age
-                        : student2.id - student1.id;
-
+                        : student1.name.compareTo(student2.name);
+                case null, default -> student2.id == student1.id
+                        ? student2.age - student1.age
+                        : student1.id - student2.id;
             };
         }
     }
@@ -86,13 +92,5 @@ public class Student {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public static int getNextId() {
-        return nextId;
-    }
-
-    public static void setNextId(int nextId) {
-        Student.nextId = nextId;
     }
 }
