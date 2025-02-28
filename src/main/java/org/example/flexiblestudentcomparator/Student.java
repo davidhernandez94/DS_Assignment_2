@@ -22,7 +22,7 @@ public class Student {
     }
 
     public class StudentComparator implements Comparator<Student> {
-        private final String sortType;
+        private String sortType;
 
         public StudentComparator(String sortType) {
             this.sortType = sortType;
